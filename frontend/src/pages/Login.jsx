@@ -16,7 +16,7 @@ function login() {
         <div className='w-1/2 flex min-h-screen justify-center'>
             <div className='flex flex-col justify-center px-8 items-center w-full max-w-md'>
                 <div>
-                    <h1 className='text-3xl font-bold text-black'>Sign In</h1>
+                    <h1 className='flex text-3xl font-bold text-black justify-center'>Sign In</h1>
                     <p className='text-gray-400'>Welcome back to TalentBridge.</p>
                 </div>
                 <form action="" className='w-full space-y-5'>
@@ -28,8 +28,8 @@ function login() {
                         <label htmlFor="Password" className='text-black block'>Password</label>
                         <input type= "password" placeholder='********' className='w-full rounded-lg border px-4 py-2' />
                     </div>
-                    <button type='submit'>Login</button>
-                    <button>Create account</button>
+                    <button type='submit' className='w-full bg-blue-600 p-2 rounded-lg hover:bg-blue-400'>Login</button>
+                    <button className='text-blue-600 bg-gray-100 w-full p-2 rounded-lg'>Create account</button>
                 </form>
             </div>
         </div>
