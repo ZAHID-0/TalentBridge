@@ -25,7 +25,7 @@ export const createJob = async (req, res) => {
             description : newJob.description
         });
     } catch (error) {
-        console.error("Error in create Job",error);
+        console.error("Error in create Job: ", error);
         res.status(500).json({message : "Internal Server Error"})
     }
 };
@@ -36,7 +36,7 @@ export const getJobs = async (req, res) => {
         const jobs = await Job.find().sort({createdAt : -1});
         res.status(200).json(jobs)
     } catch (error) {
-        console.error("Error in getJobs:", error);
+        console.error("Error in getJobs: ", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
@@ -51,7 +51,7 @@ export const getJobById = async (req, res) => {
 
         res.status(200).json(job);
     } catch (error) {
-        console.error("Error in getJobById:", error);
+        console.error("Error in getJobById: ", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 
@@ -73,7 +73,7 @@ export const deleteJob = async (req, res) => {
 
         return res.status(200).json({message : "Job Deleted Successfully"});
     } catch (error) {
-        console.error("Error in delete Job:", error);
+        console.error("Error in delete Job: ", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };

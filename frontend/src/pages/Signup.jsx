@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CandidateSignupForm from '../components/CandidateSignupForm';
 import RecruiterSignupForm from '../components/RecruiterSignupForm';
 
 function Signup() {
+    const [role, setRole] = useState("candidate");
   return (
      <div className='flex w-full min-h-screen text-white'>
         <div className='w-1/2 bg-gradient-to-tr from-blue-500 to-blue-700 p-14'>
@@ -24,17 +25,17 @@ function Signup() {
                 <div>
                     <p>I am a</p>
                     <div className='grid grid-flow-col space-x-3'>
-                        <button className='grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl'>
+                        <button className='grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl' onClick={()=>setRole("candidate")}>
                             <h3 className='font-bold'>Candidate</h3>
                             <p className='text-sm text-gray-500'>Apply to jobs with your CV</p>
                         </button>
-                        <button className='grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl'>
+                        <button className='grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl' onClick={()=>setRole("recruiter")}>
                             <h3 className='font-bold'>Recruiter</h3>
                             <p className='text-sm text-gray-500'>Publish Jobs and review applicants</p>
                         </button>
                     </div>
                 </div>
-                <RecruiterSignupForm />
+                {role === "candidate" ? <CandidateSignupForm /> : <RecruiterSignupForm /> }
             </div>
         </div>
     </div>

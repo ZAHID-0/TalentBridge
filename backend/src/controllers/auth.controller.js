@@ -8,6 +8,10 @@ export const signup = async (req, res) => {
     const {fullName, email, password, role, phone, company } = req.body;
     const cv = req.file;
 
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
+
     try {
         if(!["recruiter","candidate"].includes(role)){
             return res.status(400).json({message : "Role Isn't Valide"});
@@ -36,6 +40,7 @@ export const signup = async (req, res) => {
 
         let cvUrl=null;
         if(role === "candidate" && cv){
+            console.log("Uploading CV...");
             const uploadResponse = await cloudinary.uploader.upload(
                 cv.path, 
                 {
@@ -44,7 +49,10 @@ export const signup = async (req, res) => {
                 }
             );
             cvUrl = uploadResponse.secure_url;
+            console.log("CV URL:", cvUrl);
         }
+        
+        console.log("Creating user...");
 
         const newUser = new User({
             fullName,
@@ -55,6 +63,7 @@ export const signup = async (req, res) => {
             company,
             cv : cvUrl
         });
+        console.log("Saving user...");
 
         if(newUser) {
             await newUser.save();
@@ -72,7 +81,7 @@ export const signup = async (req, res) => {
             res.status(400).json({message : 'invalide User Data'});
         }
     } catch (error) {
-        console.log("Error in signUp"+error);
+        console.log("Error in signUp: ",error);
         res.status(500).json({message : 'internal Server Error'});
     }
 };
@@ -104,7 +113,7 @@ export const login = async (req, res) => {
         });
 
     } catch (error) {
-        console.log("Error in signUp"+error);
+        console.log("Error in signUp: ",error);
         res.status(500).json({message : 'internal Server Error'});
     }
 };
