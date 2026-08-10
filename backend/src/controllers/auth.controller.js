@@ -8,9 +8,6 @@ export const signup = async (req, res) => {
     const {fullName, email, password, role, phone, company } = req.body;
     const cv = req.file;
 
-    console.log("BODY:", req.body);
-    console.log("FILE:", req.file);
-
 
     try {
         if(!["recruiter","candidate"].includes(role)){
@@ -39,20 +36,17 @@ export const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         let cvUrl=null;
-        if(role === "candidate" && cv){
-            console.log("Uploading CV...");
+        if (role === "candidate" && cv) {
             const uploadResponse = await cloudinary.uploader.upload(
-                cv.path, 
+                cv.path,
                 {
-                    folder : "TalentBridge/CVs",
-                    resource_type : "image"
+                    folder: "TalentBridge/CVs",
+                    resource_type: "image"
                 }
             );
+
             cvUrl = uploadResponse.secure_url;
-            console.log("CV URL:", cvUrl);
         }
-        
-        console.log("Creating user...");
 
         const newUser = new User({
             fullName,
@@ -63,7 +57,6 @@ export const signup = async (req, res) => {
             company,
             cv : cvUrl
         });
-        console.log("Saving user...");
 
         if(newUser) {
             await newUser.save();
