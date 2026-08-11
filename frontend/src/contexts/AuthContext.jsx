@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { axiosInstance } from "../lib/axios";
 import toast from 'react-hot-toast';
 
@@ -29,7 +29,7 @@ export function AuthProvider ({children}) {
         try {
             const res = await axiosInstance.post("/auth/signup", data);
             setAuthUser(res.data);
-            toast.success("Account Created Successfully" || "there is an error");
+            toast.success("Account Created Successfully");
         } catch (error) {
             toast.error(error.response?.data?.message);
             console.log("Error in Auth signup: ", error);

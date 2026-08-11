@@ -25,11 +25,11 @@ function Signup() {
                 <div>
                     <p>I am a</p>
                     <div className='grid grid-flow-col space-x-3'>
-                        <button className='grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl' onClick={()=>setRole("candidate")}>
+                        <button className={`grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl ${role === "candidate" ? "bg-blue-100" : ""}`} onClick={()=>setRole("candidate")}>
                             <h3 className='font-bold'>Candidate</h3>
                             <p className='text-sm text-gray-500'>Apply to jobs with your CV</p>
                         </button>
-                        <button className='grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl' onClick={()=>setRole("recruiter")}>
+                        <button className={`grid-cols-1 border-gray-200 py-4 px-3 border rounded-xl ${role === "recruiter" ? "bg-blue-100" : ""}`} onClick={()=>setRole("recruiter")}>
                             <h3 className='font-bold'>Recruiter</h3>
                             <p className='text-sm text-gray-500'>Publish Jobs and review applicants</p>
                         </button>

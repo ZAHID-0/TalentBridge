@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useAuth } from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 function login() {
+
+    const { login, isLogin } = useAuth();
+
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        await login(formData);
+    };
+
   return (
     <div className='flex w-full min-h-screen text-white'>
         <div className='w-1/2 bg-gradient-to-tr from-blue-500 to-blue-700'>
@@ -19,17 +35,41 @@ function login() {
                     <h1 className='flex text-3xl font-bold text-black justify-center'>Sign In</h1>
                     <p className='text-gray-400'>Welcome back to TalentBridge.</p>
                 </div>
-                <form action="" className='w-full space-y-5'>
+                <form  onSubmit={handleSubmit} className='w-full space-y-5'>
                     <div className='space-y-2'>
                         <label htmlFor="Email" className='text-black block'>Email</label>
-                        <input type="email" placeholder='user@gmail.com' className='w-full rounded-lg border px-4 py-2' />
+                        <input  type="email"
+                                placeholder="user@gmail.com"
+                                className="w-full rounded-lg border px-4 py-2 text-black"
+                                value={formData.email}
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        email: e.target.value
+                                    })
+                                }
+                            />
                     </div>
                     <div className='space-y-2'>
                         <label htmlFor="Password" className='text-black block'>Password</label>
-                        <input type= "password" placeholder='********' className='w-full rounded-lg border px-4 py-2' />
+                        <input type="password"
+                                placeholder="********"
+                                className="w-full rounded-lg border px-4 py-2 text-black"
+                                value={formData.password}
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        password: e.target.value
+                                    })
+                                }
+                            />
                     </div>
-                    <button type='submit' className='w-full bg-blue-600 p-2 rounded-lg hover:bg-blue-400'>Login</button>
-                    <button className='text-blue-600 bg-gray-100 w-full p-2 rounded-lg'>Create account</button>
+                    <button type="submit"
+                            disabled={isLogin}
+                            className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-400 disabled:opacity-50">
+                            {isLogin ? "Logging in..." : "Login"}
+                    </button>
+                    <Link to={"/signup"} ><button className='text-blue-600 bg-gray-100 w-full p-2 rounded-lg'>Create account</button></Link>
                 </form>
             </div>
         </div>

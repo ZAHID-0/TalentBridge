@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function RecruiterSignupForm() {
   return (
@@ -20,7 +21,7 @@ function RecruiterSignupForm() {
             <input type="password" placeholder='At least 6 characters' className='w-full rounded-lg border px-4 py-2' />
         </div>
         <button type='submit' className='text-white w-full bg-blue-600 p-2 rounded-lg hover:bg-blue-400'>Create account</button>
-        <button className='text-blue-600 bg-gray-100 w-full p-2 rounded-lg'>Alredy have An Account?</button>
+        <Link to={"/login"}><button className='text-blue-600 bg-gray-100 w-full p-2 rounded-lg'>Alredy have An Account?</button></Link>
     </form>
   )
 }

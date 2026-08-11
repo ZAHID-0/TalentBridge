@@ -1,7 +1,9 @@
 import React from 'react'
 import BrowsJobs from '../components/BrowsJobs'
+import { useAuth } from '../hooks/useAuth'
 
 function Jobs() {
+    const {logout} = useAuth();
   return (
     <div className='min-h-screen flex'>
         <div className='w-2/12 min-h-screen border border-l-2 border-gray-400 p-6 text-gray-600'>
@@ -9,7 +11,7 @@ function Jobs() {
             <div className='w-full flex flex-col justify-start mt-4'>
                 <button className='p-2 w-full rounded-xl text-start'>Brows Jobs</button>
             </div>
-            <button className='absolute bottom-9'>Logout</button>
+            <button className='absolute bottom-9' onClick={logout}>Logout</button>
         </div>
        <div className='w-full min-h-scree px-28 py-10 bg-gray-100'> 
             <div className='flex justify-between'>

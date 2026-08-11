@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 function CandidateSignupForm() {
     const {signup} = useAuth();
@@ -70,7 +71,7 @@ function CandidateSignupForm() {
              onChange={(e) => setFormData({...formData, password : e.target.value})} />
         </div>
         <button type='submit' className='text-white w-full bg-blue-600 p-2 rounded-lg hover:bg-blue-400'>Create account</button>
-        <button className='text-blue-600 bg-gray-100 w-full p-2 rounded-lg'>Alredy have An Account?</button>
+        <Link to={"/login"}><button className='text-blue-600 bg-gray-100 w-full p-2 rounded-lg'>Alredy have An Account?</button></Link>
     </form>
   )
 }

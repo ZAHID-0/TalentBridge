@@ -41,7 +41,7 @@ export const getApplications = async (req, res) => {
         const jobsIds = jobs.map(job => job._id);
         const applications = await Application.find({
             jobId : {$in : jobsIds}
-        }).populate("candidateId","fullName email cv").populate("jobId","title");
+        }).populate("candidateId","fullName email cv").populate("jobId","title location employmentType");
 
         res.status(200).json(applications);
     } catch (error) {
