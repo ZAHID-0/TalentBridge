@@ -9,6 +9,8 @@ export function ApplicationProvider({children}) {
     const [applications, setApplications] = useState([]);
     const [isApplicationsLoading, setIsApplicationsLoading] = useState(false);
     const [isApplying, setIsApplying] = useState(false);
+    const [isMyApplicationsLoading, setIsMyApplicationsLoading] = useState(false);
+    const [myApplications, setMyApplications] = useState([]);
 
     const applyToJob = async (jobId) => {
         setIsApplying(true);
@@ -39,16 +41,31 @@ export function ApplicationProvider({children}) {
         }
     };
 
+    const getMyApplications = async () => {
+        setIsMyApplicationsLoading(true);
+        try {
+            const res = await axiosInstance.get("/applications/my");
+            setMyApplications(res.data);
+        } catch (error) {
+            toast.error(error.response?.data?.message);
+        } finally {
+            setIsMyApplicationsLoading(false);
+        }
+    };
+
     return (
         <ApplicationContext.Provider
             value={{
                 applications,
+                myApplications,
 
                 isApplicationsLoading,
                 isApplying,
+                isMyApplicationsLoading,
 
                 applyToJob,
-                getApplications
+                getApplications,
+                getMyApplications
             }}
         >
             {children}

@@ -49,3 +49,17 @@ export const getApplications = async (req, res) => {
         res.status(500).json({message : 'internal Server Error'});
     }
 };
+
+
+export const getMyApplications = async (req, res) => {
+    try {
+        if(req.user.role !== "candidate") return res.status(403).json({message : "Only candidates can see their applications"});
+        const applications = await Application.find({
+            candidateId : req.user._id
+        }).populate("jobId", "title company location employmentType description");
+        res.status(200).json(applications);
+    } catch (error) {
+        console.log("Error in Get My Applications: " + error);
+        res.status(500).json({message : "Internal Server Error"});
+    }
+};

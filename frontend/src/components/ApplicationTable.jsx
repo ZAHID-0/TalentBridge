@@ -10,30 +10,23 @@ function ApplicationTable() {
         isApplicationsLoading
     } = useApplications();
 
-    const {
-        deleteJob
-    } = useJobs();
+    const { deleteJob, jobs, getJobs } = useJobs();
 
     const [selectedCV, setSelectedCV] = useState(null);
 
 
     useEffect(() => {
-        getApplications();
+      getJobs();
+      getApplications();
     }, []);
 
 
-    const groupedApplications = applications.reduce((groups, application) => {
-        const jobId = application.jobId?._id;
-        if (!jobId) return groups;
-        if (!groups[jobId]) {
-            groups[jobId] = {
-                job: application.jobId,
-                applicants: []
-            };
-        }
-        groups[jobId].applicants.push(application.candidateId);
-        return groups;
-    }, {});
+    const groupedApplications = jobs.map((job) => ({
+      job,
+      applicants: applications
+          .filter((application) => application.jobId?._id === job._id)
+          .map((application) => application.candidateId)
+    }));
 
 
     if (isApplicationsLoading) {
@@ -48,7 +41,7 @@ function ApplicationTable() {
     return (
         <div className="w-full mt-5 space-y-6">
 
-            {Object.values(groupedApplications).map(({ job, applicants }) => (
+            {groupedApplications.map(({ job, applicants }) => (
 
                 <div
                     key={job._id}
@@ -68,9 +61,10 @@ function ApplicationTable() {
                         </div>
 
 
-                        <button
-                            onClick={() => deleteJob(job._id)}
-                            className="text-red-500 hover:text-red-700"
+                        <button onClick={async () => {await deleteJob(job._id);
+                                                      await getApplications();
+                        }}
+                                className="text-red-500 hover:text-red-700"
                         >
                             Delete Job
                         </button>

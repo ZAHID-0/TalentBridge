@@ -34,7 +34,7 @@ function ApplicationCreate() {
     };
 
     return (
-        <div className='w-full min-h-screen p-10 bg-gray-100'>
+        <div className='w-full h-screen p-10 bg-gray-100 overflow-y-auto'>
             <div className='flex justify-between'>
                 <div>
                     <h1 className='text-4xl font-bold'>Create job</h1>

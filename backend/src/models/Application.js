@@ -11,7 +11,9 @@ const applicationSchema = new mongoose.Schema({
         ref : "Job",
         required : true
     }
-});
+ }, {
+    timestamps : true
+ });
 
 applicationSchema.index(
     { candidateId: 1, jobId: 1 },

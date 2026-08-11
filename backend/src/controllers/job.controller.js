@@ -10,6 +10,7 @@ export const createJob = async (req, res) => {
 
         const newJob = new Job({
             recruiterId : req.user._id,
+            company: req.user.company,
             title,
             location,
             employmentType,
@@ -20,6 +21,7 @@ export const createJob = async (req, res) => {
         res.status(201).json({
             _id : newJob._id,
             title : newJob.title,
+            company : newJob.company,
             location : newJob.location,
             employmentType : newJob.employmentType,
             description : newJob.description
