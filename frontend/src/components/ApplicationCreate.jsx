@@ -57,7 +57,7 @@ function ApplicationCreate() {
                     <input id='location'
                      name='location'
                      type='text'
-                     placeholder='ex: Morocco'
+                     placeholder='ex: Rabat'
                      value={formData.location} 
                      onChange={handleChange} 
                      className='w-full rounded-lg border px-4 py-2' />

@@ -26,7 +26,7 @@ function login() {
                     <h1 className='font-bold text-3xl max-w-[13em]'>Where good engineers meet good teams.</h1>
                     <p className='text-gray-300 max-w-[26em]'>TalentBridge keeps hiring simple: publish a role, apply in one click, review applicants.</p>
                 </div>
-                <p className='flex flex-col justify-end'>© 2026 TalentBridge</p>
+                <p className='flex flex-col absolute bottom-0 left-14'>© 2026 TalentBridge</p>
             </div>
         </div>
         <div className='w-1/2 flex min-h-screen justify-center'>
